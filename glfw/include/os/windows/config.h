@@ -1,5 +1,5 @@
 //========================================================================
-// GLFW 3.0 - www.glfw.org
+// GLFW 3.1 - www.glfw.org
 //------------------------------------------------------------------------
 // Copyright (c) 2010 Camilla Berglund <elmindreda@elmindreda.org>
 //
@@ -23,13 +23,15 @@
 //    distribution.
 //
 //========================================================================
-// As config.h.in, this file is used by CMake to produce the config.h shared
-// configuration header file.  If you are adding a feature requiring
-// conditional compilation, this is the proper place to add the macros.
+// As glfw_config.h.in, this file is used by CMake to produce the
+// glfw_config.h configuration header file.  If you are adding a feature
+// requiring conditional compilation, this is where to add the macro.
 //========================================================================
-// As config.h, this file defines compile-time build options and macros for
-// all platforms supported by GLFW.  As this is a generated file, don't modify
-// it.  Instead, you should modify the config.h.in file.
+// As glfw_config.h, this file defines compile-time option macros for a
+// specific platform and development environment.  If you are using the
+// GLFW CMake files, modify glfw_config.h.in instead of this file.  If you
+// are using your own build system, make this file define the appropriate
+// macros in whatever way is suitable.
 //========================================================================
 
 // Define this to 1 if building GLFW for X11
@@ -38,6 +40,8 @@
 #define _GLFW_WIN32
 // Define this to 1 if building GLFW for Cocoa
 /* #undef _GLFW_COCOA */
+// Define this to 1 if building GLFW for Wayland
+/* #undef _GLFW_WAYLAND */
 
 // Define this to 1 if building GLFW for EGL
 /* #undef _GLFW_EGL */
@@ -71,6 +75,8 @@
 /* #undef _GLFW_USE_CHDIR */
 // Define this to 1 if glfwCreateWindow should populate the menu bar
 /* #undef _GLFW_USE_MENUBAR */
+// Define this to 1 if windows should use full resolution on Retina displays
+/* #undef _GLFW_USE_RETINA */
 
 // Define this to 1 if using OpenGL as the client library
 #define _GLFW_USE_OPENGL
@@ -79,6 +85,6 @@
 // Define this to 1 if using OpenGL ES 2.0 as the client library
 /* #undef _GLFW_USE_GLESV2 */
 
-// The GLFW version as used by glfwGetVersionString
-#define _GLFW_VERSION_FULL "3.0.3"
 
+// The GLFW version as used by glfwGetVersionString
+#define _GLFW_VERSION_FULL "3.1.0"

@@ -1,7 +1,8 @@
 //========================================================================
-// GLFW 3.0 OS X - www.glfw.org
+// GLFW 3.1 Win32 - www.glfw.org
 //------------------------------------------------------------------------
-// Copyright (c) 2010 Camilla Berglund <elmindreda@elmindreda.org>
+// Copyright (c) 2002-2006 Marcus Geelnard
+// Copyright (c) 2006-2010 Camilla Berglund <elmindreda@elmindreda.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -26,48 +27,43 @@
 
 #include "internal.h"
 
-#include <limits.h>
-#include <string.h>
 
-#if _WIN64
-#define strdup _strdup
-#endif
+//////////////////////////////////////////////////////////////////////////
+//////                       GLFW internal API                      //////
+//////////////////////////////////////////////////////////////////////////
+
+int _glfwInitTLS(void)
+{
+    _glfw.win32_tls.context = TlsAlloc();
+    if (_glfw.win32_tls.context == TLS_OUT_OF_INDEXES)
+    {
+        _glfwInputError(GLFW_PLATFORM_ERROR,
+                        "Win32: Failed to allocate TLS index");
+        return GL_FALSE;
+    }
+
+    _glfw.win32_tls.allocated = GL_TRUE;
+    return GL_TRUE;
+}
+
+void _glfwTerminateTLS(void)
+{
+    if (_glfw.win32_tls.allocated)
+        TlsFree(_glfw.win32_tls.context);
+}
+
+void _glfwSetCurrentContext(_GLFWwindow* context)
+{
+    TlsSetValue(_glfw.win32_tls.context, context);
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-void _glfwPlatformSetClipboardString(_GLFWwindow* window, const char* string)
+_GLFWwindow* _glfwPlatformGetCurrentContext(void)
 {
-    NSArray* types = [NSArray arrayWithObjects:NSStringPboardType, nil];
-
-    NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
-    [pasteboard declareTypes:types owner:nil];
-    [pasteboard setString:[NSString stringWithUTF8String:string]
-                  forType:NSStringPboardType];
-}
-
-const char* _glfwPlatformGetClipboardString(_GLFWwindow* window)
-{
-    NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
-
-    if (![[pasteboard types] containsObject:NSStringPboardType])
-    {
-        _glfwInputError(GLFW_FORMAT_UNAVAILABLE, NULL);
-        return NULL;
-    }
-
-    NSString* object = [pasteboard stringForType:NSStringPboardType];
-    if (!object)
-    {
-        _glfwInputError(GLFW_PLATFORM_ERROR,
-                        "Cocoa: Failed to retrieve object from pasteboard");
-        return NULL;
-    }
-
-    free(_glfw.ns.clipboardString);
-    _glfw.ns.clipboardString = strdup([object UTF8String]);
-
-    return _glfw.ns.clipboardString;
+    return TlsGetValue(_glfw.win32_tls.context);
 }
 

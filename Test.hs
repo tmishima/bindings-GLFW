@@ -43,6 +43,7 @@ main = do
     p'win <- withCString "bindings-GLFW test" $ \p'title ->
       c'glfwCreateWindow 100 100 p'title nullPtr nullPtr
     c'glfwMakeContextCurrent p'win
+    c'glfwShowWindow p'win
 
     defaultMain $ tests p'mon p'win
 
@@ -54,8 +55,8 @@ main = do
 
 versionMajor, versionMinor, versionRevision :: Int
 versionMajor    = 3
-versionMinor    = 0
-versionRevision = 3
+versionMinor    = 1
+versionRevision = 0
 
 giveItTime :: IO ()
 giveItTime = threadDelay 500000
@@ -320,8 +321,8 @@ test_window_pos p'win = do
 
 test_window_size :: Ptr C'GLFWwindow -> IO ()
 test_window_size p'win = do
-    let w = 17
-        h = 37
+    let w = 116 -- 17 
+        h = 116 -- 37 
     c'glfwSetWindowSize p'win w h
     giveItTime
     alloca $ \p'w' ->
@@ -351,7 +352,6 @@ test_iconification :: Ptr C'GLFWwindow -> IO ()
 test_iconification p'win = do
     r0 <- c'glfwGetWindowAttrib p'win c'GLFW_ICONIFIED
     r0 @?= c'GL_FALSE
-
     c'glfwIconifyWindow p'win
     giveItTime
 
@@ -402,7 +402,7 @@ test_cursor_pos p'win =
 test_glfwGetWindowAttrib :: Ptr C'GLFWwindow -> IO ()
 test_glfwGetWindowAttrib p'win = do
     let pairs =
-          [ ( c'GLFW_FOCUSED,    c'GL_FALSE        )
+          [ ( c'GLFW_FOCUSED,    c'GL_TRUE         )
           , ( c'GLFW_ICONIFIED,  c'GL_FALSE        )
           , ( c'GLFW_RESIZABLE,  c'GL_TRUE         )
           , ( c'GLFW_DECORATED,  c'GL_TRUE         )
