@@ -2253,6 +2253,20 @@ GLFWAPI int glfwExtensionSupported(const char* extension);
  */
 GLFWAPI GLFWglproc glfwGetProcAddress(const char* procname);
 
+/*! @brief Get Platform Window Handle.
+ *
+ *  # Windows Only # 
+ *
+ *  @param[in] window.
+ *  @return The address of the Window Handle, or `NULL` if the function is
+ *  unavailable.
+ *
+ *  @note This function may only be called from the main thread.
+ *
+ *  @ingroup window
+ */
+GLFWAPI void* glfwGetWindowHandle(GLFWwindow* handle);
+
 
 /*************************************************************************
  * Global definition cleanup

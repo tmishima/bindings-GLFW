@@ -672,3 +672,9 @@ GLFWAPI void glfwWaitEvents(void)
     _glfwPlatformWaitEvents();
 }
 
+GLFWAPI void* glfwGetWindowHandle(GLFWwindow* handle)
+{
+    _GLFW_REQUIRE_INIT();
+    return (void*) glfwGetWin32Window(handle);
+}
+

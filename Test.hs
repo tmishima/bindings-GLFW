@@ -43,7 +43,8 @@ main = do
     p'win <- withCString "bindings-GLFW test" $ \p'title ->
       c'glfwCreateWindow 100 100 p'title nullPtr nullPtr
     c'glfwMakeContextCurrent p'win
-
+    whdl <- c'glfwGetWindowHandle p'win
+    putStrLn $ " window handle = " ++ (show whdl)
     defaultMain $ tests p'mon p'win
 
     -- TODO because of how defaultMain works, this code is not reached
@@ -320,8 +321,8 @@ test_window_pos p'win = do
 
 test_window_size :: Ptr C'GLFWwindow -> IO ()
 test_window_size p'win = do
-    let w = 17
-        h = 37
+    let w = 217
+        h = 237
     c'glfwSetWindowSize p'win w h
     giveItTime
     alloca $ \p'w' ->

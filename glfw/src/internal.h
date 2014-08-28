@@ -548,6 +548,11 @@ int _glfwPlatformExtensionSupported(const char* extension);
  */
 GLFWglproc _glfwPlatformGetProcAddress(const char* procname);
 
+/*! @copydoc glfwGetWin32Window
+ *  @ingroup platform
+ */
+GLFWAPI HWND glfwGetWin32Window(GLFWwindow* handle);
+
 
 //========================================================================
 // Event API functions
