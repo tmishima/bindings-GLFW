@@ -371,6 +371,7 @@ deriving instance Data     C'GLFWwindow
 #ccall glfwSwapInterval               , CInt ->                                                               IO ()
 #ccall glfwExtensionSupported         , Ptr CChar ->                                                          IO CInt
 #ccall glfwGetProcAddress             , Ptr CChar ->                                                          IO <GLFWglproc>
-data HWND = HWND 
+data VoidPointer = VoidPointer
   deriving (Show,Eq)
-#ccall glfwGetWindowHandle            , Ptr <GLFWwindow> ->                                                   IO (Ptr HWND)
+type HWND = Ptr VoidPointer
+#ccall glfwGetWindowHandle            , Ptr <GLFWwindow> ->                                                   IO HWND
