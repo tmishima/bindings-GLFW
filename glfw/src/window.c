@@ -678,3 +678,7 @@ GLFWAPI void* glfwGetWindowHandle(GLFWwindow* handle)
     return (void*) glfwGetWin32Window(handle);
 }
 
+GLFWAPI void* glfwGetWinDC(void* hwnd)
+{
+    return (void*)glfwGetWindowDC(hwnd);
+}

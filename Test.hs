@@ -45,6 +45,8 @@ main = do
     c'glfwMakeContextCurrent p'win
     whdl <- c'glfwGetWindowHandle p'win
     putStrLn $ " window handle = " ++ (show whdl)
+    wdc <- c'glfwGetWinDC whdl
+    putStrLn $ " DC handle = " ++ (show wdc)
     defaultMain $ tests p'mon p'win
 
     -- TODO because of how defaultMain works, this code is not reached

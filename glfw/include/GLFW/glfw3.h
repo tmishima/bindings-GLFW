@@ -2267,6 +2267,19 @@ GLFWAPI GLFWglproc glfwGetProcAddress(const char* procname);
  */
 GLFWAPI void* glfwGetWindowHandle(GLFWwindow* handle);
 
+/*! @brief Get Platform Window DC.
+ *
+ *  # Windows Only # 
+ *
+ *  @param[in] HWND.
+ *  @return The address of the Window Handle, or `NULL` if the function is
+ *  unavailable.
+ *
+ *  @note This function may only be called from the main thread.
+ *
+ *  @ingroup window
+ */
+GLFWAPI void* glfwGetWinDC(void* hwnd);
 
 /*************************************************************************
  * Global definition cleanup

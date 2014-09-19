@@ -551,8 +551,12 @@ GLFWglproc _glfwPlatformGetProcAddress(const char* procname);
 /*! @copydoc glfwGetWin32Window
  *  @ingroup platform
  */
-GLFWAPI HWND glfwGetWin32Window(GLFWwindow* handle);
+HWND glfwGetWin32Window(GLFWwindow* handle);
 
+/*! @copydoc glfwGetWindowDC
+ *  @ingroup platform
+ */
+HDC glfwGetWindowDC(HWND hwnd);
 
 //========================================================================
 // Event API functions
@@ -766,5 +770,6 @@ void _glfwDestroyMonitor(_GLFWmonitor* monitor);
 /*! @ingroup utility
   */
 void _glfwDestroyMonitors(_GLFWmonitor** monitors, int count);
+
 
 #endif // _internal_h_

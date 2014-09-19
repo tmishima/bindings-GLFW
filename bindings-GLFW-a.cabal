@@ -1,5 +1,5 @@
 name:         bindings-GLFW-a
-version:      3.0.3.3
+version:      3.0.4.0
 category:     Graphics
 
 author:       Brian Lewis <brian@lorf.org>
@@ -162,7 +162,7 @@ test-suite main
   frameworks: AGL Cocoa OpenGL IOKit CoreFoundation CoreVideo
 
   build-depends:
-    bindings-GLFW,
+    bindings-GLFW-a,
     HUnit                == 1.2.*,
     base                  < 5,
     test-framework       == 0.8.*,

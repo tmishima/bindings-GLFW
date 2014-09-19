@@ -374,4 +374,7 @@ deriving instance Data     C'GLFWwindow
 data VoidPointer = VoidPointer
   deriving (Show,Eq)
 type HWND = Ptr VoidPointer
+type HDC = Ptr VoidPointer
 #ccall glfwGetWindowHandle            , Ptr <GLFWwindow> ->                                                   IO HWND
+#ccall glfwGetWinDC                   , HWND ->                                                               IO HDC
+

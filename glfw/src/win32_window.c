@@ -1129,10 +1129,14 @@ void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
 //////                        GLFW native API                       //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWAPI HWND glfwGetWin32Window(GLFWwindow* handle)
+HWND glfwGetWin32Window(GLFWwindow* handle)
 {
     _GLFWwindow* window = (_GLFWwindow*) handle;
     _GLFW_REQUIRE_INIT_OR_RETURN(NULL);
     return window->win32.handle;
 }
 
+HDC glfwGetWindowDC(HWND hwnd)
+{
+    return GetDC(hwnd);
+}
